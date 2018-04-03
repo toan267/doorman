@@ -18,6 +18,21 @@ final class ProcessCallbackTask extends CallbackTask implements Expires, Process
     private $expiredAt;
 
     /**
+     * @var null|boolean
+     */
+    private $persistent;
+
+    /**
+     * @inheritdoc
+     *
+     * @return null|int
+     */
+    public function isPersistent()
+    {
+        return $this->persistent;
+    }
+    
+    /**
      * @inheritdoc
      *
      * @return null|int

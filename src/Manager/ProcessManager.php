@@ -87,9 +87,23 @@ final class ProcessManager implements Manager
      */
     public function addTask(Task $task)
     {
-        $this->waiting[] = $task;
+        // $this->waiting[] = $task;
+        if ($task->isPersistent() && !empty($this->getStatsForProcesses(array($task))))
+            $this->running[] = $task;
+        else 
+            $this->waiting[] = $task;
 
         return $this;
+    }
+
+    public function join($task) {
+        while ($this->isTicked($task)) {
+            usleep(100);
+        }
+    }
+
+    public function isTicked(Task $task) {
+        return !$this->canRemoveTask($task);
     }
 
     /**
@@ -597,7 +611,7 @@ final class ProcessManager implements Manager
     public function __destruct()
     {
         foreach ($this->running as $task) {
-            $this->killTask($task);
+            if (!$task->isPersistent()) $this->killTask($task);
         }
     }
 }

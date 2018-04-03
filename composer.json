@@ -1,5 +1,5 @@
 {
-    "name": "asyncphp/doorman",
+    "name": "toan267/doorman",
     "description": "Child process management",
     "license": "MIT",
     "require": {
@@ -18,5 +18,24 @@
         "psr-4": {
             "AsyncPHP\\Doorman\\Tests\\": "tests"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "toan267/doorman",
+                "version": "dev-master",
+                "source": {
+                    "url": "https://github.com/toan267/doorman.git",
+                    "type": "git",
+                    "reference": "master"
+                },
+                "autoload": {
+                    "psr-4": {
+                        "AsyncPHP\\Doorman\\": "src"
+                    }
+                }
+            }
+        }
+    ]
 }

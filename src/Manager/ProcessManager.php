@@ -264,6 +264,8 @@ final class ProcessManager implements Manager
         $stats = [];
 
         foreach ($processes as $process) {
+            if (empty($process->getId())) continue;
+            
             $output = $this->getShell()->exec("ps -o pid,%%cpu,%%mem,state,start -p %s | sed 1d", [
                 $process->getId(),
             ]);
